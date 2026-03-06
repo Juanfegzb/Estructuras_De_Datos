@@ -63,16 +63,16 @@ class OrderList:
 
 lista = OrderList([5,1,7,3])
 
-print(lista)      # [1,3,5,7]
+print(lista)      
 
 lista.add(4)
-print(lista)      # [1,3,4,5,7]
+print(lista)      
 
-print(len(lista)) # 5
-
-print(lista[2])   # 4
+print(len(lista)) 
+print(lista[2])   
 
 lista.remove(3)
-print(lista)      # [1,4,5,7]
+print(lista)     
 
-print(4 in lista) # True
+
+print(4 in lista) 
