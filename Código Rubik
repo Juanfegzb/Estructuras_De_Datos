@@ -1,0 +1,116 @@
+from collections import deque
+import copy
+
+class Rubik:
+    def __init__(self):
+        self.estado = {
+            'U': [['W']*3 for _ in range(3)],
+            'D': [['Y']*3 for _ in range(3)],
+            'F': [['G']*3 for _ in range(3)],
+            'B': [['B']*3 for _ in range(3)],
+            'L': [['O']*3 for _ in range(3)],
+            'R': [['R']*3 for _ in range(3)]
+        }
+
+    def convertir_estado(self, estado):
+        s = ""
+        for cara in ['U','D','F','B','L','R']:
+            for fila in estado[cara]:
+                s += ''.join(fila)
+        return s
+
+    def mover_U(self, estado):
+        nuevo = copy.deepcopy(estado)
+
+        # Rotar cara superior
+        nuevo['U'] = [list(x) for x in zip(*nuevo['U'][::-1])]
+
+        # Intercambiar filas
+        nuevo['F'][0], nuevo['R'][0], nuevo['B'][0], nuevo['L'][0] = \
+            estado['R'][0], estado['B'][0], estado['L'][0], estado['F'][0]
+
+        return nuevo
+
+    def bfs(self, inicio):
+        objetivo = self.convertir_estado(self.estado)
+
+        cola = deque([(inicio, [])])
+        visitados = set()
+
+        while cola:
+            actual, camino = cola.popleft()
+            actual_str = self.convertir_estado(actual)
+
+            if actual_str == objetivo:
+                return camino
+
+            if actual_str not in visitados:
+                visitados.add(actual_str)
+
+                vecino = self.mover_U(actual)
+                cola.append((vecino, camino + ['U']))
+
+        return None
+
+    def mostrar_cubo(self, estado):
+        print("\nCara Superior (U):")
+        for fila in estado['U']:
+            print(fila)
+
+        print("\nCara Frontal (F):")
+        for fila in estado['F']:
+            print(fila)
+
+        print("\nCara Derecha (R):")
+        for fila in estado['R']:
+            print(fila)
+
+        print("\nCara Izquierda (L):")
+        for fila in estado['L']:
+            print(fila)
+
+        print("\nCara Trasera (B):")
+        for fila in estado['B']:
+            print(fila)
+
+        print("\nCara Inferior (D):")
+        for fila in estado['D']:
+            print(fila)
+
+rubik = Rubik()
+
+veces = int(input("¿Cuántas veces quieres mezclar el cubo con U?: "))
+
+mezclado = rubik.estado
+
+# Mezclar
+for i in range(veces):
+    mezclado = rubik.mover_U(mezclado)
+
+print("\nCubo mezclado:")
+rubik.mostrar_cubo(mezclado)
+
+# Buscar solución
+solucion = rubik.bfs(mezclado)
+
+print("\nSolución encontrada:")
+if solucion:
+    print(" -> ".join(solucion))
+    print("Cantidad de movimientos:", len(solucion))
+else:
+    print("El cubo ya está resuelto")
+
+estado_final = mezclado
+if solucion:
+    for mov in solucion:
+        if mov == 'U':
+            estado_final = rubik.mover_U(estado_final)
+
+print("\nCubo después de aplicar la solución:")
+rubik.mostrar_cubo(estado_final)
+
+# Verificar
+if rubik.convertir_estado(estado_final) == rubik.convertir_estado(rubik.estado):
+    print("\n El cubo quedó resuelto correctamente.")
+else:
+    print("\n El cubo NO se resolvió.")
