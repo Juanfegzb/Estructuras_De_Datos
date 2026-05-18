@@ -1,0 +1,158 @@
+# Resolución de Cubo Rubik con BFS
+
+## Integrantes
+- Juan Felipe Gonzalez
+- Cristian Ruiz
+- Sofia Caro
+- Angel Barbosa
+
+---
+
+# Proyecto Final: Algoritmo de búsqueda para la resolución del cubo Rubik
+
+## 1. Introducción
+
+El cubo Rubik es un rompecabezas tridimensional compuesto por diferentes piezas móviles que permiten generar millones de combinaciones posibles. Debido a la gran cantidad de estados que puede alcanzar, este problema es ampliamente utilizado en áreas como inteligencia artificial, teoría de grafos y estructuras de datos.
+
+En este proyecto se implementó un resolvedor de cubo Rubik 3x3x3 utilizando el algoritmo de búsqueda BFS (Breadth First Search). El programa representa el cubo mediante estructuras híbridas de datos y permite realizar movimientos, visualizar el estado del cubo y encontrar una solución dentro de una profundidad limitada.
+
+Además, el sistema incorpora visualización gráfica mediante Matplotlib para mostrar el estado del cubo y animar la solución paso a paso.
+
+---
+
+# 2. Objetivos
+
+## Objetivo general
+
+Implementar un sistema capaz de representar y resolver un cubo Rubik 3x3x3 utilizando el algoritmo BFS.
+
+## Objetivos específicos
+
+- Representar computacionalmente un cubo Rubik.
+- Implementar movimientos válidos del cubo.
+- Aplicar el algoritmo BFS para encontrar soluciones.
+- Visualizar gráficamente el cubo.
+- Analizar el comportamiento y complejidad del algoritmo.
+
+---
+
+# 3. Explicación del programa
+
+El programa fue desarrollado en Python utilizando programación orientada a objetos.
+
+La clase principal `CuboRubikHibrido` representa las seis caras del cubo mediante matrices de 3x3 almacenadas dentro de un diccionario.
+
+Cada movimiento del cubo se implementó mediante funciones independientes, permitiendo:
+
+- Giros horarios.
+- Giros antihorarios.
+- Giros dobles.
+
+El resolvedor utiliza BFS para explorar todos los estados posibles del cubo hasta encontrar una solución.
+
+La búsqueda utiliza:
+
+- Cola FIFO (`deque`).
+- Conjunto de estados visitados.
+- Copias profundas del cubo.
+
+El sistema también incluye:
+
+- Visualización gráfica del cubo.
+- Animación paso a paso.
+- Ingreso manual de estados.
+- Resolución automática.
+
+---
+
+# 4. Funcionamiento del algoritmo BFS
+
+El algoritmo Breadth First Search (BFS) explora primero todos los estados cercanos al estado inicial antes de avanzar a niveles más profundos.
+
+## Funcionamiento general
+
+1. Se agrega el estado inicial a una cola.
+2. Se extrae el primer estado.
+3. Se generan todos los movimientos posibles.
+4. Se agregan nuevos estados no visitados.
+5. El proceso continúa hasta encontrar la solución.
+
+## Ventajas de BFS
+
+- Garantiza encontrar la solución más corta.
+- Es sencillo de implementar.
+- Permite recorrer sistemáticamente el espacio de estados.
+
+## Desventajas
+
+- Consume mucha memoria.
+- El tiempo de ejecución crece rápidamente.
+- No es eficiente para profundidades muy grandes.
+
+---
+
+# 5. Tabla comparativa
+
+| Característica | BFS | DFS |
+|---|---|---|
+| Tipo de recorrido | Por niveles | Por profundidad |
+| Estructura utilizada | Cola (FIFO) | Pila (LIFO) |
+| Garantiza solución mínima | Sí | No |
+| Consumo de memoria | Alto | Bajo |
+| Velocidad en problemas grandes | Más lenta | Más rápida en algunos casos |
+| Complejidad temporal | O(V + E) | O(V + E) |
+| Complejidad espacial | O(V) | O(h) |
+| Adecuado para cubo Rubik | Sí, para soluciones cortas | Limitado |
+| Riesgo de ciclos infinitos | Bajo usando visitados | Alto si no se controla |
+| Facilidad de implementación | Alta | Alta |
+
+---
+
+# 6. Resultados obtenidos
+
+El programa logró:
+
+- Representar correctamente el cubo Rubik.
+- Aplicar movimientos válidos.
+- Resolver configuraciones simples mediante BFS.
+- Mostrar visualmente cada estado.
+- Animar la solución paso a paso.
+
+Durante las pruebas se observó que:
+
+- BFS encuentra soluciones óptimas.
+- El número de nodos visitados aumenta rápidamente.
+- Limitar la profundidad mejora el rendimiento.
+
+---
+
+# 7. Tabla de reflexión
+
+| Pregunta | Respuesta |
+|---|---|
+| ¿Por qué BFS garantiza la solución más corta? | Porque explora los estados por niveles y encuentra primero la solución con menor cantidad de movimientos. |
+| ¿Cuál fue la mayor dificultad del proyecto? | Implementar correctamente los movimientos del cubo y mantener consistencia entre las caras adyacentes. |
+| ¿Qué ventajas tiene representar el cubo con matrices? | Facilita el acceso, modificación y visualización de las piezas del cubo. |
+| ¿Por qué es importante almacenar estados visitados? | Para evitar ciclos y repetir configuraciones ya exploradas. |
+| ¿Qué limitaciones tiene BFS en este problema? | El gran consumo de memoria y tiempo cuando aumenta la profundidad de búsqueda. |
+| ¿Cómo podría mejorarse el proyecto? | Implementando algoritmos heurísticos como A* o IDA* para reducir el espacio de búsqueda. |
+| ¿Qué aprendizaje dejó el proyecto? | Comprender cómo aplicar algoritmos de búsqueda a problemas reales de inteligencia artificial. |
+
+---
+
+# 8. Conclusiones
+
+- El cubo Rubik puede modelarse como un problema de espacio de estados.
+- BFS permite encontrar soluciones óptimas para configuraciones simples.
+- El crecimiento exponencial del espacio de búsqueda hace que BFS tenga limitaciones prácticas.
+- La visualización gráfica facilita comprender el funcionamiento del algoritmo.
+- El proyecto permitió integrar estructuras de datos, grafos e inteligencia artificial en una aplicación práctica.
+
+---
+
+# 9. Bibliografía
+
+- Russell, Stuart & Norvig, Peter. *Inteligencia Artificial: Un Enfoque Moderno*.
+- Documentación oficial de Python.
+- Documentación oficial de Matplotlib.
+- Material de clase sobre BFS y estructuras de datos.
